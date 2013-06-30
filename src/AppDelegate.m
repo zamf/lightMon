@@ -5,28 +5,27 @@
 
 @implementation AppDelegate
 
-
-//return true if Intel
-- (BOOL) getGFXStatus {
+- (enum GFX_RET_TYPE) getGFXStatus {
     
-    NSTask *task;
-    task = [[NSTask alloc] init];
+    NSTask *task = [[NSTask alloc] init];
+    NSPipe *pipe = [[NSPipe alloc] init];
+    
+    if (pipe == nil || task == nil) {
+        NSLog(@"allocation error");
+        return ERROR;
+    }
     
     [task setLaunchPath:@"/bin/bash"];
     
     NSArray *arguments;
-    //arguments = [NSArray arrayWithObjects: @"-c", @"\"/usr/sbin/system_profiler SPDisplaysDataType | /usr/bin/grep Intel -A15 | /usr/bin/grep Displays\"", nil];
     
     arguments = [NSArray arrayWithObjects: @"-c", @"/usr/sbin/system_profiler SPDisplaysDataType | /usr/bin/grep Intel -A15 | /usr/bin/grep Displays", nil];
     
     [task setArguments: arguments];
     
-    NSPipe *pipe;
-    pipe = [NSPipe pipe];
     [task setStandardOutput: pipe];
     
-    NSFileHandle *file;
-    file = [pipe fileHandleForReading];
+    NSFileHandle *file = [pipe fileHandleForReading];
     
     [task launch];
     
@@ -36,11 +35,13 @@
     NSString *string;
     string = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
     
-    
     //trim string
     string = [string stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    //NSLog (@"parsed: \n%@", string);
-    return [string isEqualToString:GREP_OUTPUT];
+    if ([string isEqualToString:GREP_OUTPUT]) {
+        return INTEGRATED;
+    } else {
+        return DISCRETE;
+    }
 }
 
 
@@ -61,13 +62,12 @@
     [menu addItem:quit];
    
     
-    //[statusItem setTitle:@"i"];
     [statusItem setMenu:menu];
     
     
     // If your application is background (LSBackgroundOnly) then you need this call
     // otherwise the window manager will draw other windows on top of your menu
-    //[NSApp activateIgnoringOtherApps:YES];
+    [NSApp activateIgnoringOtherApps:YES];
     
     NSLog(@"Starting GFX Status App - Launching Worker Thread");
     
@@ -75,22 +75,22 @@
     
     [NSThread detachNewThreadSelector:@selector(updateGFXStatus:) toTarget:self withObject:nil];
     
-
 }
 
 
 -(void)updateGFXStatus:(id)sender {
     
-    // Perform a search operation here
-    
     while(_working) {
         
-        BOOL isIntel = [self getGFXStatus];
+        enum GFX_RET_TYPE ret = [self getGFXStatus];
         
-        if (isIntel) {
+        if (ret == INTEGRATED) {
             [statusItem setTitle:@"i"];
-        } else {
+        } else if (ret == DISCRETE){
             [statusItem setTitle:@"n"];
+        } else {
+            assert(ret == ERROR);
+            [statusItem setTitle:@"e"];
         }
 
         
@@ -105,11 +105,6 @@
     [[NSStatusBar systemStatusBar] removeStatusItem:statusItem];
 }
 
-
-#pragma mark - Menu Actions
-- (void) doSomethingCool {
-    NSLog(@"Doing something really awesome!");
-}
 
 - (void) quit_application {
     _working = false;
