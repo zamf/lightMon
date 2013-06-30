@@ -8,10 +8,15 @@
 - (enum GFX_RET_TYPE) getGFXStatus {
     
     NSTask *task = [[NSTask alloc] init];
-    NSPipe *pipe = [[NSPipe alloc] init];
+    if (task == nil) {
+        NSLog(@"failed alloc or init for task");
+        return ERROR;
+    }
+
+    NSPipe *pipe = [NSPipe pipe];
     
-    if (pipe == nil || task == nil) {
-        NSLog(@"allocation error");
+    if (pipe == nil) {
+        NSLog(@"failed init for pipe, maybe ran out of file descriptors?");
         return ERROR;
     }
     
@@ -29,8 +34,12 @@
     
     [task launch];
     
+    [task waitUntilExit];
+    
     NSData *data;
     data = [file readDataToEndOfFile];
+   
+    [file closeFile];
     
     NSString *string;
     string = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
