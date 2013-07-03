@@ -1,0 +1,2 @@
+- use the API to get the used graphics cards
+- display the applications that use the discrete card
