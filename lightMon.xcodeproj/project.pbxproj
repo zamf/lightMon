@@ -16,15 +16,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F75A980F1709016B00B8F330 /* gfxStatus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gfxStatus.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F75A980F1709016B00B8F330 /* lightMon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = lightMon.app; path = /Users/zamf/Desktop/lightMon/build/Release/lightMon.app; sourceTree = "<absolute>"; };
 		F75A98121709016B00B8F330 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		F75A98151709016B00B8F330 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		F75A98161709016B00B8F330 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		F75A98171709016B00B8F330 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		F75A981A1709016B00B8F330 /* gfxStatus-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "gfxStatus-Info.plist"; sourceTree = "<group>"; };
+		F75A981A1709016B00B8F330 /* lightMon-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "lightMon-Info.plist"; sourceTree = "<group>"; };
 		F75A981C1709016B00B8F330 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F75A981E1709016B00B8F330 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		F75A98201709016B00B8F330 /* gfxStatus-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "gfxStatus-Prefix.pch"; sourceTree = "<group>"; };
+		F75A98201709016B00B8F330 /* lightMon-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "lightMon-Prefix.pch"; sourceTree = "<group>"; };
 		F75A98221709016B00B8F330 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		F75A98241709016B00B8F330 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F75A98251709016B00B8F330 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -46,18 +46,9 @@
 		F75A98061709016B00B8F330 = {
 			isa = PBXGroup;
 			children = (
-				F75A98181709016B00B8F330 /* gfxStatus */,
+				F75A98181709016B00B8F330 /* lightMon */,
 				F75A98111709016B00B8F330 /* Frameworks */,
-				F75A98101709016B00B8F330 /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		F75A98101709016B00B8F330 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				F75A980F1709016B00B8F330 /* gfxStatus.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		F75A98111709016B00B8F330 /* Frameworks */ = {
@@ -79,7 +70,7 @@
 			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
-		F75A98181709016B00B8F330 /* gfxStatus */ = {
+		F75A98181709016B00B8F330 /* lightMon */ = {
 			isa = PBXGroup;
 			children = (
 				F75A98241709016B00B8F330 /* AppDelegate.h */,
@@ -87,17 +78,17 @@
 				F75A98271709016B00B8F330 /* MainMenu.xib */,
 				F75A98191709016B00B8F330 /* Supporting Files */,
 			);
-			name = gfxStatus;
+			name = lightMon;
 			path = src;
 			sourceTree = "<group>";
 		};
 		F75A98191709016B00B8F330 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				F75A981A1709016B00B8F330 /* gfxStatus-Info.plist */,
+				F75A981A1709016B00B8F330 /* lightMon-Info.plist */,
 				F75A981B1709016B00B8F330 /* InfoPlist.strings */,
 				F75A981E1709016B00B8F330 /* main.m */,
-				F75A98201709016B00B8F330 /* gfxStatus-Prefix.pch */,
+				F75A98201709016B00B8F330 /* lightMon-Prefix.pch */,
 				F75A98211709016B00B8F330 /* Credits.rtf */,
 			);
 			name = "Supporting Files";
@@ -106,9 +97,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F75A980E1709016B00B8F330 /* gfxStatus */ = {
+		F75A980E1709016B00B8F330 /* lightMon */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F75A982C1709016B00B8F330 /* Build configuration list for PBXNativeTarget "gfxStatus" */;
+			buildConfigurationList = F75A982C1709016B00B8F330 /* Build configuration list for PBXNativeTarget "lightMon" */;
 			buildPhases = (
 				F75A980B1709016B00B8F330 /* Sources */,
 				F75A980C1709016B00B8F330 /* Frameworks */,
@@ -118,9 +109,9 @@
 			);
 			dependencies = (
 			);
-			name = gfxStatus;
+			name = lightMon;
 			productName = src;
-			productReference = F75A980F1709016B00B8F330 /* gfxStatus.app */;
+			productReference = F75A980F1709016B00B8F330 /* lightMon.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -132,7 +123,7 @@
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Cristian Zamfir";
 			};
-			buildConfigurationList = F75A980A1709016B00B8F330 /* Build configuration list for PBXProject "gfxStatus" */;
+			buildConfigurationList = F75A980A1709016B00B8F330 /* Build configuration list for PBXProject "lightMon" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -140,11 +131,11 @@
 				en,
 			);
 			mainGroup = F75A98061709016B00B8F330;
-			productRefGroup = F75A98101709016B00B8F330 /* Products */;
+			productRefGroup = F75A98061709016B00B8F330;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F75A980E1709016B00B8F330 /* gfxStatus */,
+				F75A980E1709016B00B8F330 /* lightMon */,
 			);
 		};
 /* End PBXProject section */
@@ -266,9 +257,9 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "src/gfxStatus-Prefix.pch";
-				INFOPLIST_FILE = "src/gfxStatus-Info.plist";
-				PRODUCT_NAME = gfxStatus;
+				GCC_PREFIX_HEADER = "src/lightMon-Prefix.pch";
+				INFOPLIST_FILE = "src/lightMon-Info.plist";
+				PRODUCT_NAME = lightMon;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -278,9 +269,9 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "src/gfxStatus-Prefix.pch";
-				INFOPLIST_FILE = "src/gfxStatus-Info.plist";
-				PRODUCT_NAME = gfxStatus;
+				GCC_PREFIX_HEADER = "src/lightMon-Prefix.pch";
+				INFOPLIST_FILE = "src/lightMon-Info.plist";
+				PRODUCT_NAME = lightMon;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -288,7 +279,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F75A980A1709016B00B8F330 /* Build configuration list for PBXProject "gfxStatus" */ = {
+		F75A980A1709016B00B8F330 /* Build configuration list for PBXProject "lightMon" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F75A982A1709016B00B8F330 /* Debug */,
@@ -297,7 +288,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F75A982C1709016B00B8F330 /* Build configuration list for PBXNativeTarget "gfxStatus" */ = {
+		F75A982C1709016B00B8F330 /* Build configuration list for PBXNativeTarget "lightMon" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F75A982D1709016B00B8F330 /* Debug */,
