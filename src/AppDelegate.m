@@ -12,7 +12,7 @@
         NSLog(@"failed alloc or init for task");
         return ERROR;
     }
-
+    
     NSPipe *pipe = [NSPipe pipe];
     
     if (pipe == nil) {
@@ -38,7 +38,7 @@
     
     NSData *data;
     data = [file readDataToEndOfFile];
-   
+    
     [file closeFile];
     
     NSString *string;
@@ -63,17 +63,13 @@
                                             &numCPUsU, &cpuInfo,
                                             &numCpuInfo);
     
-    if(err != KERN_SUCCESS)
-    {
+    if(err != KERN_SUCCESS) {
         return CPU_USAGE_ERROR;
     }
-    
     
     [CPUUsageLock lock];
     
     float sum = 0;
-    
-    int usedCores = 0; //only count cores that are used more than 1%
     
     for(unsigned i = 0U; i < numCPUs; ++i) {
         float inUse, total;
@@ -82,32 +78,24 @@
                      (cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_USER]   - prevCpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_USER])
                      + (cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_SYSTEM] - prevCpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_SYSTEM])
                      + (cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_NICE]   - prevCpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_NICE])
-                    );
+                     );
             total = inUse + (cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_IDLE] -
                              prevCpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_IDLE]);
         } else {
             inUse = cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_USER] +
-                    cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_SYSTEM] +
-                    cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_NICE];
+            cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_SYSTEM] +
+            cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_NICE];
             total = inUse + cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_IDLE];
         }
         
-        if (inUse / total > 0.01) {
-            sum += inUse / total;
-            usedCores++;
-            //NSLog(@"Core: %u Usage: %d", i, (int) (100 * inUse / total));
-        }
+        sum += inUse / total;
+        //NSLog(@"Core: %u Usage: %d", i, (int) (100 * inUse / total));
     }
     
     [CPUUsageLock unlock];
     
-    if (usedCores > 0) {
-        *average = (int) (100 * sum / usedCores);
-    } else {
-        *average = 0;
-    }
-
-
+    *average = (int) (100 * sum / numCPUs);
+    
     if(prevCpuInfo) {
         size_t prevCpuInfoSize = sizeof(integer_t) * numPrevCpuInfo;
         vm_deallocate(mach_task_self(), (vm_address_t) prevCpuInfo, prevCpuInfoSize);
@@ -143,12 +131,12 @@
     
     // create a new NSMenu for the status bar item
     NSMenu *menu = [[NSMenu alloc] init];
-
+    
     // create some top level menu items
     NSMenuItem *quit = [[NSMenuItem alloc] initWithTitle:@"Quit" action:@selector(quit_application) keyEquivalent:@"Q"];
     
     [menu addItem:quit];
-   
+    
     
     [statusItem setMenu:menu];
     
@@ -193,7 +181,7 @@
         } else {
             status = [NSString stringWithFormat:@"%@%@", status, @"e"];
         }
-  
+        
         [statusItem setTitle:status];
         
         sleep(DEFAULT_SLEEP);
