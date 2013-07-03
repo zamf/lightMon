@@ -73,6 +73,8 @@
     
     float sum = 0;
     
+    int usedCores = 0; //only count cores that are used more than 1%
+    
     for(unsigned i = 0U; i < numCPUs; ++i) {
         float inUse, total;
         if(prevCpuInfo) {
@@ -89,14 +91,23 @@
                     cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_NICE];
             total = inUse + cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_IDLE];
         }
-        sum += inUse / total;
-        //NSLog(@"Core: %u Usage: %d", i, (int) (100 * inUse / total));
+        
+        if (inUse / total > 0.01) {
+            sum += inUse / total;
+            usedCores++;
+            NSLog(@"Core: %u Usage: %d", i, (int) (100 * inUse / total));
+        }
     }
     
     [CPUUsageLock unlock];
     
-    *average = (int) (100 * sum / numCPUs);
-    
+    if (usedCores > 0) {
+        *average = (int) (100 * sum / usedCores);
+    } else {
+        *average = 0;
+    }
+
+
     if(prevCpuInfo) {
         size_t prevCpuInfoSize = sizeof(integer_t) * numPrevCpuInfo;
         vm_deallocate(mach_task_self(), (vm_address_t) prevCpuInfo, prevCpuInfoSize);
