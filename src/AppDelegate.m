@@ -95,7 +95,7 @@
         if (inUse / total > 0.01) {
             sum += inUse / total;
             usedCores++;
-            NSLog(@"Core: %u Usage: %d", i, (int) (100 * inUse / total));
+            //NSLog(@"Core: %u Usage: %d", i, (int) (100 * inUse / total));
         }
     }
     
